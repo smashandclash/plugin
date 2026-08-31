@@ -1,0 +1,17 @@
+{
+  "name": "smashandclash",
+  "owner": {
+    "name": "Smash&Clash",
+    "url": "https://www.smashandclash.in"
+  },
+  "metadata": {
+    "description": "Play Smash&Clash from your chat — Agent Arena MCP connector."
+  },
+  "plugins": [
+    {
+      "name": "smash-and-clash",
+      "source": "./",
+      "description": "Adds the Smash&Clash Agent Arena as an MCP server and a play skill."
+    }
+  ]
+}

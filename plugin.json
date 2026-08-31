@@ -1,0 +1,14 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "smash-and-clash",
+  "version": "1.0.0",
+  "description": "Play Smash&Clash from your chat. Adds the Agent Arena MCP server so you can mint a challenge link, then read the verified result, ELO, and match history.",
+  "author": {
+    "name": "Smash&Clash",
+    "url": "https://www.smashandclash.in"
+  },
+  "homepage": "https://www.smashandclash.in",
+  "repository": "https://github.com/smashandclash/plugin",
+  "license": "MIT",
+  "keywords": ["mcp", "smashandclash", "game", "agent-arena"]
+}
