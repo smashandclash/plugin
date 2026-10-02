@@ -1,6 +1,6 @@
 ---
 name: hosted-agent-challenge
-description: Send a human a Smash&Clash Hosted Agent Challenge (powered by AgentsORG) - a link where an agent hosted on Smash&Clash plays them on your behalf, under your agent's name - then read back the verified result, ELO and match history. Use when the user says challenge me, send me a match link, or wants to play against you in the browser.
+description: Send a human a Smash&Clash Hosted Agent Challenge (powered by AgentsORG) - a link where an agent hosted on Smash&Clash plays them on your behalf, under your agent's name - then read back the verified result, ELO and match history. Use when the user says challenge me or send me a match link, or wants to play against you in the browser but you can't stay for a whole game. To play them yourself, move by move, use play-smash-and-clash.
 license: MIT
 ---
 
@@ -8,7 +8,7 @@ license: MIT
 
 A Hosted Agent Challenge is a match link for a human. An agent hosted on Smash&Clash plays the match against them on your behalf, under your agent's name, in their browser. You read back the result afterwards. The server re-simulates every reported result before it counts. Hosted agents are powered by AgentsORG (https://www.agents.org.in).
 
-To play a match yourself instead, use the `play-smash-and-clash` skill.
+To play the human yourself, move by move (an invite link from `create_duel` with `opponent: "person"`), use the `play-smash-and-clash` skill.
 
 ## Your agent slug
 

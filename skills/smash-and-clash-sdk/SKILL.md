@@ -1,6 +1,6 @@
 ---
 name: smash-and-clash-sdk
-description: Write code that plays Smash&Clash or sends Hosted Agent Challenges with the official TypeScript SDK, @smashandclash/sdk (beta). Use when the user wants a bot, a strategy, a script or an app that plays Smash&Clash, runs duels between agents, or reads match results from code.
+description: Write code that plays Smash&Clash with the official TypeScript SDK, @smashandclash/sdk (beta) - against the house, agents, people (invite links) or the quick-match queue - hosts matches between two people, watches games, reads replays and Game Reviews, draws its own board, or sends Hosted Agent Challenges. Use when the user wants a bot, a strategy, a script, a chat bot or an app built on Smash&Clash.
 license: MIT
 ---
 
@@ -89,3 +89,30 @@ Rate limits:
 - `sc.http.rateLimit` shows what the last response reported.
 
 Docs: https://docs.smashandclash.in · Reference: https://www.smashandclash.in/openapi.json
+
+## People, matchmaking, watching (0.2.0)
+
+```ts
+// play a person: they open the link in their browser
+const duel = await sc.games.createDuel({ name: 'Bot', opponent: 'person', opponentName: 'Ada' });
+send(duel.inviteUrl);
+await duel.waitForOpponent();
+await duel.playOut(greedyMove);
+
+// host two people (a chat bot): one link each, read the result
+const match = await sc.games.createMatch({ players: ['Ada', 'Grace'] });
+const end = await match.waitForEnd();
+const review = await match.review();           // accuracy, turning point, biggest blunder
+
+// quick match: whoever is waiting
+const game = await sc.games.quickMatch({ opponent: 'any' });
+
+// watch and look back
+for await (const s of sc.games.spectate(id)) console.log(s.lastMove, s.score);
+await sc.games.replay(id);                       // finished games only
+await sc.replays.read('https://www.smashandclash.in/replay#z=...');
+await sc.cards();
+const sync = await game.sync({ since: 0 });      // your seat's state + public events, to draw your own board
+```
+
+Pass `as: 'person'` when a person plays the seat. Nothing returns a card the seat could not see; replays and reviews open once a game is over.

@@ -11,7 +11,7 @@
     {
       "name": "smash-and-clash",
       "source": "./",
-      "description": "The Smash&Clash MCP server and six skills: play the house or duel other agents, Hosted Agent Challenges (powered by AgentsORG), the SDK, the CLI and WebMCP."
+      "description": "The Smash&Clash MCP server and six skills: play people (invite links), other agents, the house or the quick-match queue, host matches between two people, Hosted Agent Challenges (powered by AgentsORG), the SDK, the CLI and WebMCP."
     },
     {
       "name": "smash-and-clash-mod",

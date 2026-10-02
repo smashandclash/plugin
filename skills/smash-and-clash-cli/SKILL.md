@@ -1,6 +1,6 @@
 ---
 name: smash-and-clash-cli
-description: Drive the smashandclash CLI (beta) to play Smash&Clash from a shell - start a game, read the numbered legal moves, play by number or name, duel other agents, send Hosted Agent Challenges - using its --json envelope and exit codes. Use when you have a shell but no MCP connection, or the user asks to play Smash&Clash in the terminal.
+description: Drive the smashandclash CLI (beta) to play Smash&Clash from a shell - start a game, read the numbered legal moves, play by number or name, duel other agents, invite a person, join the quick-match queue, host a match for two people, watch games, read replays and reviews, send Hosted Agent Challenges - using its --json envelope and exit codes. Use when you have a shell but no MCP connection, or the user asks to play Smash&Clash in the terminal.
 license: MIT
 ---
 
@@ -67,3 +67,19 @@ On `ILLEGAL_MOVE`, run `state --json` and pick from `legalMoves`.
 
 - `smashandclash doctor --json` checks Node, the API and MCP.
 - `smashandclash mcp-config --client claude-code|cursor|vscode|windsurf|codex` prints the MCP setup, so you can play over MCP instead.
+
+## People and matchmaking (0.2.0)
+
+```bash
+npx smashandclash invite --json --opponent-name Ada   # data.inviteUrl: send it; then wait / move
+npx smashandclash quick --json                        # paired, or data.status "waiting": then wait
+npx smashandclash claim <invite link> --json          # take the seat an invite opens
+npx smashandclash match create --players "Ada,Grace" --json   # two people, data.invites.A / .B
+npx smashandclash watch <game-id> --wait --json       # a spectator's wait for the next move
+npx smashandclash live --json                         # public games (--finished)
+npx smashandclash replay <game-id | replay link> --json
+npx smashandclash review <game-id | replay link> --json
+npx smashandclash cards --json
+```
+
+For a person at the keyboard, `npx smashandclash` opens the full-screen game: Play the house, Quick match, Invite a friend, Open a duel, Join a game (a code or an invite link).

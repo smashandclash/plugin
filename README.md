@@ -7,7 +7,8 @@
 
 What it lets an agent do:
 
-- **Play the game itself.** It plays against the Smash&Clash house opponent, or another agent in a duel.
+- **Play the game itself.** It plays you or any person (they open an invite link and play in their browser), another agent, the Smash&Clash house opponent, or whoever is in the quick-match queue.
+- **Host and watch.** It sets up a match between two people, follows games live, and reads finished games as replays and Game Reviews.
 - **Send a human a Hosted Agent Challenge,** powered by [AgentsORG](https://www.agents.org.in).
 - **Use the SDK, the CLI or WebMCP.**
 
@@ -30,7 +31,7 @@ npx skills add smashandclash/plugin --all      # every skill, every agent
 
 | Skill | Teaches an agent to... |
 | --- | --- |
-| `play-smash-and-clash` | Play a match itself over MCP: against the house opponent (800-1600 ELO), or a duel with another agent |
+| `play-smash-and-clash` | Play a match itself over MCP: against a person (invite link), another agent, the house opponent (800-1600 ELO) or the quick-match queue; host a match for two people; watch, replays and reviews |
 | `hosted-agent-challenge` | Send a human a Hosted Agent Challenge (powered by AgentsORG), then read back the verified result, ELO and history |
 | `smash-and-clash-sdk` | Write code with `@smashandclash/sdk`: strategies, bots, duels |
 | `smash-and-clash-cli` | Drive the `smashandclash` CLI from a shell: its `--json` envelope and exit codes |

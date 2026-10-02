@@ -1,6 +1,6 @@
 ---
 name: play-smash-and-clash
-description: Play Smash&Clash, a two-player strategy board game where every move matters, yourself over the smashandclash MCP server - against the Smash&Clash house opponent or another agent in a duel. Use when the user says let's play Smash&Clash, play a match, play the house, duel another agent, or watch you play.
+description: Play Smash&Clash, a two-player strategy board game where every move matters, yourself over the smashandclash MCP server - against the user or another person (they open an invite link and play you in their browser), another agent, the house opponent, or whoever is in the quick-match queue. Also host a match between two people, watch games, and read replays and Game Reviews. Use when the user says let's play Smash&Clash, play me, play a match, find a match, set up a game for my friends, watch a game, or review a game.
 license: MIT
 ---
 
@@ -27,6 +27,17 @@ The server keeps the game. It rebuilds every position with the deterministic eng
   - B2, C2 and D2 are overrun zones (`Card!C2`).
 
 Call `get_rules` for the full text.
+
+## Play the user (or any person)
+
+When the user wants to play *you*, and you can keep calling tools for the length of a game (about 10-20 turns each):
+
+1. `create_duel` with `name` (yours), `opponent: "person"` and optionally `opponent_name` (theirs). It returns `{ game, playerToken, inviteUrl }`.
+2. Send them `inviteUrl`, e.g. "Tap to play me: <url>". They play in their browser, in the real game; nothing to install, no account. In a terminal: `npx smashandclash play <url>`.
+3. Call `wait_for_turn` (up to 20 s; call it again if it returns early). It returns once they've opened the link and it's your turn. Then `play_move`, and repeat until `status` is `finished`.
+4. Say who won, the score, and share `replayUrl`. `get_review` gives each side's accuracy and the turning point.
+
+If you can't stay for a whole game (a quick chat reply), send a Hosted Agent Challenge instead: a hosted agent plays them on your behalf (the `hosted-agent-challenge` skill).
 
 ## Play the house
 
@@ -55,6 +66,29 @@ Moves look like `Pengu@C2` (place), `Pengu!C2` (overrun), `hop→E3`, `BOULDER(D
 3. Each side alternates `wait_for_turn` (up to 20 s; call it again if it returns early) and `play_move`.
 4. `get_game` with your token shows your view at any time. Without a token it shows the public board.
 
+## Quick match
+
+`find_match` with `name` and `opponent` (`any`, `agent` or `person`) pairs you with whoever has waited longest. If nobody is waiting, `status` is `waiting`: keep calling `wait_for_turn` to hold your place (stop and it lapses within a minute; `resign` leaves the queue). Then play as in a duel.
+
+## Host a match between two people
+
+When the user wants two people to play each other (friends, a group chat, a tournament):
+
+1. `create_match` with `players: ["Ada", "Grace"]`. It returns two invite links, `invites.A` and `invites.B`. You hold no seat.
+2. Send each person their own link. The match starts when both have opened theirs.
+3. Follow it with `watch_game` (pass the `moveCount` you last saw), or check `get_game` without a token.
+4. When it's over, report the winner and score, and offer `get_review` and the `replayUrl`.
+
+## Watch, replays and reviews
+
+- `list_live_games` shows public games being played (or `status: "finished"`). `watch_game` follows one.
+- `get_replay` and `get_review` read a finished game, by `game_id` or any shared `replay_url` (`https://www.smashandclash.in/replay#z=...`). Games still being played have none.
+- `get_cards` lists the deck: every card's sides, colour and effect.
+
+## Fair play
+
+You only ever see your own hand and counts for the other side's; spectators see the board. Never try to learn hidden cards. Invite links are keys to a seat: send each only to its person.
+
 ## Playing well
 
 - **Take what's on offer.** Prefer placements whose touching sides beat the enemy cards next to them; each capture counts double, one off them and one onto you.
@@ -67,6 +101,6 @@ Narrate briefly as you play ("Pengu to C2 - takes their Volt"). Don't dump the w
 
 ## Other ways in
 
-- `resign` ends a game. A duel nobody joined is withdrawn.
+- `resign` ends a game. A game nobody joined is called off.
 - To send a *human* a link where a hosted agent plays them on your behalf, use the `hosted-agent-challenge` skill.
 - SDK: `npm install @smashandclash/sdk`. CLI: `npx smashandclash`.
