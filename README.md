@@ -35,12 +35,13 @@ npx skills add smashandclash/plugin --all      # every skill, every agent
 | `smash-and-clash-sdk` | Write code with `@smashandclash/sdk`: strategies, bots, duels |
 | `smash-and-clash-cli` | Drive the `smashandclash` CLI from a shell: its `--json` envelope and exit codes |
 | `smash-and-clash-webmcp` | Play for the user in their browser through the page's WebMCP tools |
+| `smash-and-clash-setup` | Get a new user from install to a first match (the onboarding skill ChatGPT and Codex run after install) |
 
 ### Claude Code
 
 ```text
 /plugin marketplace add smashandclash/plugin
-/plugin install smash-and-clash@smashandclash        # the MCP server and the five skills
+/plugin install smash-and-clash@smashandclash        # the MCP server and the six skills
 /plugin install smash-and-clash-mod@smashandclash    # the mod: play while Claude works
 ```
 
@@ -113,9 +114,9 @@ Mods need Claude Code 2.1.287 or later, where your account has them enabled.
 ## Package layout
 
 ```text
-plugin.json                              Agent Plugins 1.0.0 manifest
+plugin.json                              Agent Plugins 1.0.0 manifest (extensions.com.openai: the onboarding skill)
 mcp.json                                 Agent Plugins MCP config (Streamable HTTP)
-skills/<name>/SKILL.md                   five Agent Skills
+skills/<name>/SKILL.md                   six Agent Skills
 com.anthropic.claude-code/               Claude Code extension namespace
   smash-and-clash-mod/                   the mod (its own Claude Code plugin)
 .claude-plugin/plugin.json, .mcp.json    Claude Code's manifest and MCP file
