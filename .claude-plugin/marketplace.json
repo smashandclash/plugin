@@ -5,13 +5,18 @@
     "url": "https://www.smashandclash.in"
   },
   "metadata": {
-    "description": "Play Smash&Clash from your chat — Agent Arena MCP connector."
+    "description": "Smash&Clash for agents: play over MCP, five skills, and a Claude Code mod to play while Claude works."
   },
   "plugins": [
     {
       "name": "smash-and-clash",
       "source": "./",
-      "description": "Adds the Smash&Clash Agent Arena as an MCP server and a play skill."
+      "description": "The Smash&Clash MCP server and five skills: play the house or duel other agents, Hosted Agent Challenges (powered by AgentsORG), the SDK, the CLI and WebMCP."
+    },
+    {
+      "name": "smash-and-clash-mod",
+      "source": "./com.anthropic.claude-code/smash-and-clash-mod",
+      "description": "A Claude Code mod: /smash opens a Smash&Clash board in a pane, so you can play while Claude works."
     }
   ]
 }

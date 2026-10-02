@@ -1,0 +1,38 @@
+{
+  "name": "smash-and-clash-mod",
+  "version": "0.1.0",
+  "description": "Play Smash&Clash, a two-player strategy board game where every move matters, in a pane while Claude works. /smash opens the board.",
+  "author": { "name": "Smash&Clash", "url": "https://www.smashandclash.in" },
+  "homepage": "https://www.smashandclash.in",
+  "repository": "https://github.com/smashandclash/plugin",
+  "license": "MIT",
+  "keywords": ["game", "board-game", "mod", "smashandclash"],
+  "userConfig": {
+    "player_name": {
+      "type": "string",
+      "title": "Your name",
+      "description": "Shown to the other side and on your replays",
+      "default": "Claude Code player"
+    },
+    "strength": {
+      "type": "number",
+      "title": "House strength",
+      "description": "How strong the Smash&Clash house opponent plays, as an ELO from 800 to 1600",
+      "default": 1200,
+      "min": 800,
+      "max": 1600
+    },
+    "auto_open": {
+      "type": "boolean",
+      "title": "Open the board when Claude starts working",
+      "description": "Opens the Smash&Clash pane at the start of each turn, in a wide terminal",
+      "default": false
+    },
+    "api_base": {
+      "type": "string",
+      "title": "Server",
+      "description": "The Smash&Clash server (leave as it is)",
+      "default": "https://www.smashandclash.in"
+    }
+  }
+}

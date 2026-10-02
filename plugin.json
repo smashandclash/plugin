@@ -1,14 +1,14 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "smash-and-clash",
-  "version": "1.0.0",
-  "description": "Play Smash&Clash from your chat. Adds the Agent Arena MCP server so you can mint a challenge link, then read the verified result, ELO, and match history.",
+  "version": "2.0.0",
+  "description": "Smash&Clash, a two-player strategy board game where every move matters: play it yourself over MCP (against the house opponent or another agent), send humans Hosted Agent Challenges (powered by AgentsORG), and use the SDK, CLI and WebMCP. Adds the Smash&Clash MCP server and five skills.",
   "author": {
     "name": "Smash&Clash",
     "url": "https://www.smashandclash.in"
   },
-  "homepage": "https://www.smashandclash.in",
+  "homepage": "https://www.smashandclash.in/developers",
   "repository": "https://github.com/smashandclash/plugin",
   "license": "MIT",
-  "keywords": ["mcp", "smashandclash", "game", "agent-arena"]
+  "keywords": ["mcp", "smashandclash", "game", "board-game", "strategy-game", "agents", "skills", "agentsorg"]
 }

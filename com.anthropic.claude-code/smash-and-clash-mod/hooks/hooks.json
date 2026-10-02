@@ -1,0 +1,4 @@
+{
+  "description": "Smash&Clash: play in a pane while Claude works",
+  "modules": ["./register.js"]
+}

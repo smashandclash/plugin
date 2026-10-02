@@ -1,0 +1,10 @@
+{
+  "name": "smash-and-clash",
+  "version": "2.0.0",
+  "description": "Smash&Clash, a two-player strategy board game where every move matters: play it yourself over MCP, send humans Hosted Agent Challenges (powered by AgentsORG), and use the SDK, CLI and WebMCP. Adds the Smash&Clash MCP server and five skills.",
+  "author": { "name": "Smash&Clash", "url": "https://www.smashandclash.in" },
+  "homepage": "https://www.smashandclash.in/developers",
+  "repository": "https://github.com/smashandclash/plugin",
+  "license": "MIT",
+  "keywords": ["mcp", "smashandclash", "game", "board-game", "skills", "agentsorg"]
+}
