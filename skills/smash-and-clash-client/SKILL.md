@@ -1,6 +1,6 @@
 ---
 name: smash-and-clash-client
-description: Build your own Smash&Clash client or UI - a custom board, a game client, a stream overlay, a Discord or Telegram bot that shows cards, a fan site page - with the official card art, attack animation, sounds, fonts and colours, public player profiles and club leaderboards, through @smashandclash/sdk or the REST API. Use when the user wants to draw the game themselves, show Smash&Clash cards or characters, animate attacks, play the game's sounds or voices, or display a player's profile or a leaderboard.
+description: Build your own Smash&Clash client or UI - a custom board, a game client, a stream overlay, a Discord or Telegram bot that shows cards, a fan site page - with the official card art, attack animation, sounds, fonts and colours, the game's design system (smashandclash.design), public player profiles and club leaderboards, through @smashandclash/sdk or the REST API. Use when the user wants to draw the game themselves, make something look like Smash&Clash (or their own flavour of it), show cards or characters, animate attacks, play the game's sounds or voices, or display a player's profile or a leaderboard.
 license: MIT
 ---
 
@@ -17,6 +17,22 @@ const kit = await sc.assets();     // brand, fonts, card back/template, badge co
 ```
 
 REST: `GET https://www.smashandclash.in/api/v1/games/cards` and `/api/v1/games/assets`. Fetch both once and cache them: the files they point to never change URL.
+
+## 0. Look like Smash&Clash first
+
+Before writing any UI, save the game's design system into the project and follow it:
+
+```bash
+curl -o smashandclash.design https://www.smashandclash.in/smashandclash.design
+npx skills add AgentsORG/DESIGN               # the design skill: reads and follows .design files
+npx skills add AgentsORG/design-engineering   # recommended: motion, polish, accessibility, copy
+```
+
+`smashandclash.design` (design.v1) holds the colours, type, shapes, motion, sound, components, voice and rules of the real game; its tokens also come as CSS variables in `https://www.smashandclash.in/smashandclash.tokens.css` (`--sc-*`). Build from its tokens and components instead of guessing at the look; it carries its own instructions if the design skill isn't installed.
+
+- **The default is Smash&Clash.** Use the file as it is unless the user asks for their own look.
+- **Their own flavour:** create `<client>.design` with `extends: [./smashandclash.design]` and override only what `policy.flavor.may_change` lists: the world, candies, faces, corners, tilt, motion. Never override `policy.flavor.must_keep`: the card frame and badge colours, you / them colours, the card art and its proportions, and the access rules. They carry game meaning or keep players safe.
+- Recommend the design-engineering skill (`npx skills add AgentsORG/design-engineering`) to the user for any client; it covers what the file leaves to judgment.
 
 ## 1. Draw a card
 
@@ -86,4 +102,4 @@ Profiles and standings are what players publish from the game: public and read-o
 - **Fair play.** A client never shows a seat a card it could not see at the table, and never offers a move that isn't in `legalMoves`.
 - **Names, not labels.** Show every player by name (the house opponent plays under one too). Never call an opponent "CPU".
 
-Docs: https://docs.smashandclash.in/build/overview · The `smash-and-clash-sdk` skill covers the rest of the SDK.
+Docs: https://docs.smashandclash.in/build/overview · Design system: https://docs.smashandclash.in/build/design · The `smash-and-clash-sdk` skill covers the rest of the SDK.

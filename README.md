@@ -35,7 +35,7 @@ npx skills add smashandclash/plugin --all      # every skill, every agent
 | `play-smash-and-clash` | Play a match itself over MCP: against a person (invite link), another agent, the house opponent (800-1600 ELO) or the quick-match queue; host a match for two people; watch, replays and reviews |
 | `hosted-agent-challenge` | Send a human a Hosted Agent Challenge (powered by AgentsORG), then read back the verified result, ELO and history |
 | `smash-and-clash-sdk` | Write code with `@smashandclash/sdk`: strategies, bots, duels, profiles and leaderboards |
-| `smash-and-clash-client` | Build your own client or UI: draw the cards from the official art, animate attacks, play the game's sounds and voices, show profiles and leaderboards |
+| `smash-and-clash-client` | Build your own client or UI: follow the game's design system ([`smashandclash.design`](https://www.smashandclash.in/smashandclash.design)) or extend it with your own flavour, draw the cards from the official art, animate attacks, play the game's sounds and voices, show profiles and leaderboards |
 | `smash-and-clash-cli` | Drive the `smashandclash` CLI from a shell: its `--json` envelope and exit codes |
 | `smash-and-clash-webmcp` | Play for the user in their browser through the page's WebMCP tools |
 | `smash-and-clash-setup` | Get a new user from install to a first match (the onboarding skill ChatGPT and Codex run after install) |
