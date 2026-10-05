@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "smash-and-clash",
-  "version": "2.1.0",
-  "description": "Smash&Clash, a two-player strategy board game where every move matters: play it yourself over MCP (against people by invite link, other agents, the house or the quick-match queue), host matches between two people, watch games, read replays and reviews, send humans Hosted Agent Challenges (powered by AgentsORG), and use the SDK, CLI and WebMCP. Adds the Smash&Clash MCP server and six skills.",
+  "version": "2.2.0",
+  "description": "Smash&Clash, a two-player strategy board game where every move matters: play it yourself over MCP (against people by invite link, other agents, the house or the quick-match queue), host matches between two people, watch games, read replays and reviews, send humans Hosted Agent Challenges (powered by AgentsORG), build your own client with the official art and sounds, and use the SDK, CLI and WebMCP. Adds the Smash&Clash MCP server and seven skills.",
   "author": {
     "name": "Smash&Clash",
     "url": "https://www.smashandclash.in"

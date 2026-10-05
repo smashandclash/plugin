@@ -80,7 +80,7 @@ function settle() {
     if (first) cursor = screenOf(game.seat ?? 'A', first)
     return
   }
-  const playable = (v.hand ?? []).map((h) => movesFor(v, h.card).length > 0)
+  const playable = (v.hand ?? []).map((h) => movesFor(v, h).length > 0)
   if (!playable[card]) card = Math.max(0, playable.indexOf(true))
   onBoard = false
 }
@@ -220,7 +220,7 @@ function pickCard(i) {
   if (!v?.yourTurn || !v.hand?.[i]) return
   card = i
   recruitFrom = null
-  const moves = movesFor(v, v.hand[i].card)
+  const moves = movesFor(v, v.hand[i])
   if (!moves.length) {
     note = `No legal move for ${v.hand[i].card} right now.`
     onBoard = false
@@ -248,7 +248,7 @@ async function playHere($) {
   const seat = game.seat ?? 'A'
   const h = v.hand?.[card]
   if (!v.pendingHop && h) {
-    const instant = movesFor(v, h.card).find((m) => m.kind === 'instant')
+    const instant = movesFor(v, h).find((m) => m.kind === 'instant')
     if (instant) return play($, instant.name)
   }
   const cell = cellAt(seat, cursor.sx, cursor.sy)
@@ -277,7 +277,7 @@ function suggest() {
   for (const [i, h] of (v.hand ?? []).entries()) {
     if (h.kind !== 'character') continue
     const mine = seat === 'B' ? { north: h.bottom, east: h.left, south: h.top, west: h.right } : { north: h.top, east: h.right, south: h.bottom, west: h.left }
-    for (const m of movesFor(v, h.card)) {
+    for (const m of movesFor(v, h)) {
       if (m.kind !== 'place') continue
       const c = 'ABCDE'.indexOf(m.cell[0])
       const r = Number(m.cell.slice(1))
@@ -423,7 +423,7 @@ export function register(on, options) {
               label: `${i === card ? '>' : ''}${handLabel(h)}`,
               hotkey: String(i + 1),
               plain: true,
-              dimColor: i !== card || movesFor(v, h.card).length === 0,
+              dimColor: i !== card || movesFor(v, h).length === 0,
               onPress: () => {
                 pickCard(i)
                 redraw()

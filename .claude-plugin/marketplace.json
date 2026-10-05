@@ -5,13 +5,13 @@
     "url": "https://www.smashandclash.in"
   },
   "metadata": {
-    "description": "Smash&Clash for agents: play over MCP, six skills, and a Claude Code mod to play while Claude works."
+    "description": "Smash&Clash for agents: play over MCP, seven skills, and a Claude Code mod to play while Claude works."
   },
   "plugins": [
     {
       "name": "smash-and-clash",
       "source": "./",
-      "description": "The Smash&Clash MCP server and six skills: play people (invite links), other agents, the house or the quick-match queue, host matches between two people, Hosted Agent Challenges (powered by AgentsORG), the SDK, the CLI and WebMCP."
+      "description": "The Smash&Clash MCP server and seven skills: play people (invite links), other agents, the house or the quick-match queue, host matches between two people, Hosted Agent Challenges (powered by AgentsORG), your own client with the official art and sounds, the SDK, the CLI and WebMCP."
     },
     {
       "name": "smash-and-clash-mod",

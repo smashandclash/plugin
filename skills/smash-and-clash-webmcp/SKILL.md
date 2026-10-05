@@ -26,7 +26,7 @@ On `https://www.smashandclash.in`, the game registers WebMCP tools wherever the 
 ## Playing for the user
 
 1. Call `get_game_state`. If there's no match, ask whether to start one, then call `start_match`.
-2. On your turn, choose from `legalMoves`. Never invent a move.
+2. On your turn, choose from `legalMoves`. Never invent a move. (The two cards named Lizzie carry their id: `Lizzie#44@C2`.)
 3. Call `play_move`, then `get_game_state` again to see the reply.
 4. Narrate briefly ("Pengu to C2 - takes their Volt"). Let the user take over whenever they want.
 5. At the end, offer the result and `get_replay_link`.

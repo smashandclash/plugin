@@ -8,7 +8,7 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 
-import { base64, boardRaster, cellAt, parseMove, screenOf, targetsFor } from '../hooks/game.js'
+import { base64, boardRaster, cellAt, movesFor, parseMove, screenOf, targetsFor } from '../hooks/game.js'
 
 const EMPTY = 'ABCDE'.split('').flatMap((c) => [1, 2, 3].map((r) => ({ cell: `${c}${r}` })))
 const VIEW = {
@@ -175,4 +175,20 @@ test('the band above the prompt invites /smash while Claude works and the pane i
   // idle: Claude Code's own band, untouched
   const idle = await rt.fire('ui.render', { component: 'AbovePrompt', props: { isWorking: false } }, (h) => h.match?.component === 'AbovePrompt')
   assert.deepEqual(Object.keys(idle), ['passed'])
+})
+
+test('the two Lizzies: moves name the card id, and each card gets only its own', () => {
+  assert.deepEqual(parseMove('Lizzie#44@C2'), { name: 'Lizzie#44@C2', card: 'Lizzie', cardId: 44, kind: 'place', cell: 'C2' })
+  const view = {
+    yourTurn: true,
+    hand: [
+      { card: 'Lizzie', cardId: 5, kind: 'character', top: 6, right: 6, bottom: 6, left: 6 },
+      { card: 'Lizzie', cardId: 44, kind: 'character', top: 6, right: 4, bottom: 5, left: 5 },
+    ],
+    legalMoves: ['Lizzie#5@A1', 'Lizzie#44@B1'],
+  }
+  assert.deepEqual([...targetsFor(view, 0, null).entries()], [['A1', 'Lizzie#5@A1']])
+  assert.deepEqual([...targetsFor(view, 1, null).entries()], [['B1', 'Lizzie#44@B1']])
+  assert.equal(movesFor(view, view.hand[1]).length, 1)
+  assert.equal(movesFor(view, 'Lizzie').length, 2)
 })

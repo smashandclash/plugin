@@ -18,4 +18,4 @@ Smash&Clash is a two-player strategy board game where every move matters. Get th
    - **Play in the terminal.** `npx smashandclash` opens the game; in Claude Code, the `smash-and-clash-mod` lets them play while you work (`/smash`).
 4. **Do what they pick, right away.** Don't explain every option at length; one line each is enough.
 
-Keep it friendly and short. Developers can also start with `npm install @smashandclash/sdk` (the `smash-and-clash-sdk` skill) or https://www.smashandclash.in/developers.
+Keep it friendly and short. Developers can also start with `npm install @smashandclash/sdk` (the `smash-and-clash-sdk` skill; to build their own client with the official art and sounds, the `smash-and-clash-client` skill) or https://www.smashandclash.in/developers.

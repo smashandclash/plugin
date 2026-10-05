@@ -9,11 +9,14 @@ export const plain = (s) => String(s).toLowerCase().replace(/[^a-z0-9]/g, '')
 
 /**
  * A move's card and where it lands: "Pengu@C2" (place), "Pengu!C2" (overrun),
- * "RECRUIT(A3→B1)", "FREEZE(D2)", "FLIP", "hop→B2", "hop: stay".
+ * "RECRUIT(A3→B1)", "FREEZE(D2)", "FLIP", "hop→B2", "hop: stay". Two cards are
+ * both called Lizzie, so theirs carry the card id: "Lizzie#44@C2".
  */
 export function parseMove(name) {
-  let m = /^(.+?)([@!])([A-E][1-3])$/.exec(name)
-  if (m) return { name, card: m[1], kind: m[2] === '!' ? 'overrun' : 'place', cell: m[3] }
+  let m = /^(.+?)(?:#(\d+))?([@!])([A-E][1-3])$/.exec(name)
+  if (m) {
+    return { name, card: m[1], ...(m[2] ? { cardId: Number(m[2]) } : {}), kind: m[3] === '!' ? 'overrun' : 'place', cell: m[4] }
+  }
   m = /^([A-Z]+)\(([A-E][1-3])\s*(?:→|->|>)\s*([A-E][1-3])\)$/.exec(name)
   if (m) return { name, card: m[1], kind: 'recruit', from: m[2], cell: m[3] }
   m = /^([A-Z]+)\(([A-E][1-3])\)$/.exec(name)
@@ -25,8 +28,15 @@ export function parseMove(name) {
   return { name, card: '', kind: 'other' }
 }
 
+/** Does move `m` play hand card `h` (a hand card, or just its name)? By id when the move names one. */
+export function playsCard(m, h) {
+  const name = typeof h === 'string' ? h : h?.card
+  const id = typeof h === 'string' ? undefined : h?.cardId
+  return !!m.card && plain(m.card) === plain(name) && (m.cardId === undefined || id === undefined || m.cardId === id)
+}
+
 export function movesFor(view, card) {
-  return (view?.legalMoves ?? []).map(parseMove).filter((m) => m.card && plain(m.card) === plain(card))
+  return (view?.legalMoves ?? []).map(parseMove).filter((m) => playsCard(m, card))
 }
 
 /** The cell at screen column sx (0-4, left to right) and row sy (0-2, top to bottom). */
@@ -56,7 +66,7 @@ export function targetsFor(view, cardIndex, recruitFrom) {
   const h = view.hand?.[cardIndex]
   if (!h) return out
   for (const m of moves) {
-    if (!m.card || plain(m.card) !== plain(h.card)) continue
+    if (!playsCard(m, h)) continue
     if (recruitFrom) {
       if (m.kind === 'recruit' && m.from === recruitFrom) out.set(m.cell, m.name)
     } else if (m.kind === 'recruit') {

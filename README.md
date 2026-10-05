@@ -10,6 +10,7 @@ What it lets an agent do:
 - **Play the game itself.** It plays you or any person (they open an invite link and play in their browser), another agent, the Smash&Clash house opponent, or whoever is in the quick-match queue.
 - **Host and watch.** It sets up a match between two people, follows games live, and reads finished games as replays and Game Reviews.
 - **Send a human a Hosted Agent Challenge,** powered by [AgentsORG](https://www.agents.org.in).
+- **Build your own client** with the official card art, attack animation, sounds and fonts, plus public player profiles and club leaderboards.
 - **Use the SDK, the CLI or WebMCP.**
 
 In Claude Code, the bundled mod also lets **you** play while Claude works.
@@ -33,7 +34,8 @@ npx skills add smashandclash/plugin --all      # every skill, every agent
 | --- | --- |
 | `play-smash-and-clash` | Play a match itself over MCP: against a person (invite link), another agent, the house opponent (800-1600 ELO) or the quick-match queue; host a match for two people; watch, replays and reviews |
 | `hosted-agent-challenge` | Send a human a Hosted Agent Challenge (powered by AgentsORG), then read back the verified result, ELO and history |
-| `smash-and-clash-sdk` | Write code with `@smashandclash/sdk`: strategies, bots, duels |
+| `smash-and-clash-sdk` | Write code with `@smashandclash/sdk`: strategies, bots, duels, profiles and leaderboards |
+| `smash-and-clash-client` | Build your own client or UI: draw the cards from the official art, animate attacks, play the game's sounds and voices, show profiles and leaderboards |
 | `smash-and-clash-cli` | Drive the `smashandclash` CLI from a shell: its `--json` envelope and exit codes |
 | `smash-and-clash-webmcp` | Play for the user in their browser through the page's WebMCP tools |
 | `smash-and-clash-setup` | Get a new user from install to a first match (the onboarding skill ChatGPT and Codex run after install) |
@@ -42,7 +44,7 @@ npx skills add smashandclash/plugin --all      # every skill, every agent
 
 ```text
 /plugin marketplace add smashandclash/plugin
-/plugin install smash-and-clash@smashandclash        # the MCP server and the six skills
+/plugin install smash-and-clash@smashandclash        # the MCP server and the seven skills
 /plugin install smash-and-clash-mod@smashandclash    # the mod: play while Claude works
 ```
 
@@ -106,7 +108,8 @@ Mods need Claude Code 2.1.287 or later, where your account has them enabled.
 ## Without MCP
 
 - **REST.** OpenAPI 3.1 at https://www.smashandclash.in/openapi.json:
-  - games under `/api/v1/games`;
+  - games under `/api/v1/games` (with the cards and the asset kit);
+  - players and leaderboards under `/api/v1/players`, `/api/v1/clubs` and `/api/v1/leaderboards`;
   - challenges under `/api/v1/agent`.
 - **SDK.** `npm install @smashandclash/sdk`
 - **CLI.** `npx smashandclash`. It's a full-screen game for humans, and `--json` for agents.
@@ -117,7 +120,7 @@ Mods need Claude Code 2.1.287 or later, where your account has them enabled.
 ```text
 plugin.json                              Agent Plugins 1.0.0 manifest (extensions.com.openai: the onboarding skill)
 mcp.json                                 Agent Plugins MCP config (Streamable HTTP)
-skills/<name>/SKILL.md                   six Agent Skills
+skills/<name>/SKILL.md                   seven Agent Skills
 com.anthropic.claude-code/               Claude Code extension namespace
   smash-and-clash-mod/                   the mod (its own Claude Code plugin)
 .claude-plugin/plugin.json, .mcp.json    Claude Code's manifest and MCP file
@@ -127,4 +130,4 @@ com.anthropic.claude-code/               Claude Code extension namespace
 
 There is no install script, and there are no secrets. The plugin talks to Smash&Clash's public API only.
 
-MIT licensed. The license covers this plugin's files. The Smash&Clash game and its assets are proprietary.
+MIT licensed. The license covers this plugin's files. The game's art, audio and characters stay Smash&Clash's: free to use in clients and apps built for Smash&Clash, never to present as your own.

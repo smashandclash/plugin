@@ -1,6 +1,6 @@
 ---
 name: smash-and-clash-sdk
-description: Write code that plays Smash&Clash with the official TypeScript SDK, @smashandclash/sdk (beta) - against the house, agents, people (invite links) or the quick-match queue - hosts matches between two people, watches games, reads replays and Game Reviews, draws its own board, or sends Hosted Agent Challenges. Use when the user wants a bot, a strategy, a script, a chat bot or an app built on Smash&Clash.
+description: Write code that plays Smash&Clash with the official TypeScript SDK, @smashandclash/sdk (beta) - against the house, agents, people (invite links) or the quick-match queue - hosts matches between two people, watches games, reads replays and Game Reviews, draws its own board with the official card art and animation, reads public player profiles and club leaderboards, or sends Hosted Agent Challenges. Use when the user wants a bot, a strategy, a script, a chat bot or an app built on Smash&Clash.
 license: MIT
 ---
 
@@ -24,8 +24,9 @@ import { SmashAndClash, greedyMove } from '@smashandclash/sdk';
 const sc = new SmashAndClash();
 const game = await sc.games.startHouse({ name: 'My Agent', strength: 1200 }); // 800-1600 ELO
 
-game.view?.hand;        // your cards
+game.view?.hand;        // your cards, each with its cardId
 game.legalMoves;        // e.g. ["Pengu@A1", ...]
+game.view?.moves;       // the same moves as data: { name, type, cardId, cell, ... }
 await game.play(game.legalMoves[0]);   // the house has answered when this resolves
 
 await game.playOut(greedyMove);        // or play to the end with a strategy
@@ -43,9 +44,9 @@ A strategy is `(view, seat) => moveName`. `view.board` tiles carry `owner` and `
 | south | bottom | top |
 | west | left | right |
 
-`greedyMove` from the SDK is a working starting point; read its source and improve on it.
+`boardSides(card, seat)` does this turn for you. `greedyMove` from the SDK is a working starting point; read its source and improve on it.
 
-Always return a name from `view.legalMoves`.
+Always return a name from `view.legalMoves`. Two cards share the name Lizzie (#5 and #44), so their moves carry the id: `Lizzie#44@C2`. Match hand cards to moves by `cardId`, not by name.
 
 ## Duels
 
@@ -116,3 +117,15 @@ const sync = await game.sync({ since: 0 });      // your seat's state + public e
 ```
 
 Pass `as: 'person'` when a person plays the seat. Nothing returns a card the seat could not see; replays and reviews open once a game is over.
+
+## Your own client, players and leaderboards (0.3.0)
+
+```ts
+const cards = await sc.cards();   // image (card face), art (character on transparency), colorHex, versus, animation
+const kit = await sc.assets();    // fonts, card back/template, badge colours, attack timing, music, sfx, voices
+const { player, clubs } = await sc.players.get('p-k3j9x2m1qa');   // a public profile (id = friend code)
+const board = await sc.clubs.get('ABC234');                         // or sc.leaderboards.get('discord:<id>')
+cellToRC('C2'); rcToCell({ r: 1, c: 2 }); boardSides(card, 'B');   // board helpers
+```
+
+For drawing cards, animating attacks and playing the game's sounds, use the `smash-and-clash-client` skill. The art and audio are free to use in clients built for Smash&Clash, credited, never presented as the user's own.

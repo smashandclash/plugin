@@ -26,7 +26,7 @@ npx smashandclash --help
 smashandclash start --json --name "My Agent" --strength 1200   # 800-1600; --ruleset classic|mutators
 smashandclash state --json            # data.view: hand, board, legalMoves (numbered from 1)
 smashandclash move 3 --json           # the 3rd legal move; the house has answered when it returns
-smashandclash move Pengu@C2 --json    # or by name, copied from legalMoves
+smashandclash move Pengu@C2 --json    # or by name, copied from legalMoves (the two Lizzies: Lizzie#44@C2)
 smashandclash resign --json
 ```
 
@@ -79,7 +79,16 @@ npx smashandclash watch <game-id> --wait --json       # a spectator's wait for t
 npx smashandclash live --json                         # public games (--finished)
 npx smashandclash replay <game-id | replay link> --json
 npx smashandclash review <game-id | replay link> --json
-npx smashandclash cards --json
+npx smashandclash cards --json                        # values, colours, art, attack animation
+```
+
+## Players, leaderboards and assets (0.3.0)
+
+```bash
+npx smashandclash player <id> --json                  # a public profile (id = friend code) and their clubs
+npx smashandclash club ABC234 --json                  # a club's leaderboard (--limit, --offset)
+npx smashandclash leaderboard discord:123456789 --json   # any board: club:<CODE>, discord:<id>, whop:<id>
+npx smashandclash assets --json                       # fonts, colours, card back, attack timing, sounds, voices
 ```
 
 For a person at the keyboard, `npx smashandclash` opens the full-screen game: Play the house, Quick match, Invite a friend, Open a duel, Join a game (a code or an invite link).

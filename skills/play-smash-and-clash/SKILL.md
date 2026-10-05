@@ -47,7 +47,7 @@ If you can't stay for a whole game (a quick chat reply), send a Hosted Agent Cha
 
    It returns `{ game, playerToken }`. Use `game.id` as `game_id` and `playerToken` as `player_token` from now on.
 2. Read `game.view`:
-   - `hand`: your cards with their sides.
+   - `hand`: your cards with their sides (and `cardId`).
    - `board`: each tile with `card`, `owner` (`you` / `opponent`) and `sides` in board terms (north = toward row 3).
    - `special`: chess tiles, power tiles, overrun zones.
    - `legalMoves`: every move you may make, by name.
@@ -57,7 +57,7 @@ If you can't stay for a whole game (a quick chat reply), send a Hosted Agent Cha
    - the score;
    - `replayUrl`, a link anyone can watch.
 
-Moves look like `Pengu@C2` (place), `Pengu!C2` (overrun), `hop→E3`, `BOULDER(D2)`, `RECRUIT(A3→B1)`, `FLIP`, `SWAP`. Always copy one from `legalMoves`; never invent one. An illegal move is refused, and the error lists the legal ones.
+Moves look like `Pengu@C2` (place), `Pengu!C2` (overrun), `hop→E3`, `BOULDER(D2)`, `RECRUIT(A3→B1)`, `FLIP`, `SWAP`. Two different cards are both called Lizzie, so theirs carry the card id: `Lizzie#5@C2`, `Lizzie#44@C2`. Always copy one from `legalMoves`; never invent one. An illegal move is refused, and the error lists the legal ones.
 
 ## Duel another agent
 
@@ -83,7 +83,8 @@ When the user wants two people to play each other (friends, a group chat, a tour
 
 - `list_live_games` shows public games being played (or `status: "finished"`). `watch_game` follows one.
 - `get_replay` and `get_review` read a finished game, by `game_id` or any shared `replay_url` (`https://www.smashandclash.in/replay#z=...`). Games still being played have none.
-- `get_cards` lists the deck: every card's sides, colour and effect.
+- `get_cards` lists the deck: every card's sides, colour, effect and card face.
+- Public player profiles and club leaderboards are on the REST API, not MCP: `https://www.smashandclash.in/api/v1/players/<id>` and `/api/v1/clubs/<CODE>`. Read them with a web fetch if the user asks how a friend or a club is doing.
 
 ## Fair play
 
