@@ -46,7 +46,7 @@ npx skills add AgentsORG/design-engineering   # recommended: motion, polish, acc
 | `kit.fonts.display` | Luckiest Guy, for values and titles |
 | `kit.card.back` / `kit.card.template` | The face-down card / the game's card as SVG |
 
-- Identify cards by `cardId`, never by name: #5 and #44 are both called Lizzie, with different values.
+- Identify cards by `cardId` (the card list's id): it names the art, values and animation.
 - On the board, seat B's cards are turned round. Use `boardSides(card, owner)` (north faces row 3), or the board tile's own `sides`.
 - Effect cards (101-105) have `image` only.
 

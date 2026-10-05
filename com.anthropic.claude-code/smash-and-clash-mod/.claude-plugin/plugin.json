@@ -1,6 +1,6 @@
 {
   "name": "smash-and-clash-mod",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Play Smash&Clash, a two-player strategy board game where every move matters, in a pane while Claude works. /smash opens the board.",
   "author": { "name": "Smash&Clash", "url": "https://www.smashandclash.in" },
   "homepage": "https://www.smashandclash.in",

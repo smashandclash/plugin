@@ -26,7 +26,7 @@ npx smashandclash --help
 smashandclash start --json --name "My Agent" --strength 1200   # 800-1600; --ruleset classic|mutators
 smashandclash state --json            # data.view: hand, board, legalMoves (numbered from 1)
 smashandclash move 3 --json           # the 3rd legal move; the house has answered when it returns
-smashandclash move Pengu@C2 --json    # or by name, copied from legalMoves (the two Lizzies: Lizzie#44@C2)
+smashandclash move Pengu@C2 --json    # or by name, copied from legalMoves
 smashandclash resign --json
 ```
 

@@ -46,7 +46,7 @@ A strategy is `(view, seat) => moveName`. `view.board` tiles carry `owner` and `
 
 `boardSides(card, seat)` does this turn for you. `greedyMove` from the SDK is a working starting point; read its source and improve on it.
 
-Always return a name from `view.legalMoves`. Two cards share the name Lizzie (#5 and #44), so their moves carry the id: `Lizzie#44@C2`. Match hand cards to moves by `cardId`, not by name.
+Always return a name from `view.legalMoves`. Match hand cards to moves by `cardId`.
 
 ## Duels
 

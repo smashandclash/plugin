@@ -9,8 +9,8 @@ export const plain = (s) => String(s).toLowerCase().replace(/[^a-z0-9]/g, '')
 
 /**
  * A move's card and where it lands: "Pengu@C2" (place), "Pengu!C2" (overrun),
- * "RECRUIT(A3→B1)", "FREEZE(D2)", "FLIP", "hop→B2", "hop: stay". Two cards are
- * both called Lizzie, so theirs carry the card id: "Lizzie#44@C2".
+ * "RECRUIT(A3→B1)", "FREEZE(D2)", "FLIP", "hop→B2", "hop: stay". Should two
+ * cards ever share a name, theirs carry the card id: "Name#12@C2".
  */
 export function parseMove(name) {
   let m = /^(.+?)(?:#(\d+))?([@!])([A-E][1-3])$/.exec(name)
