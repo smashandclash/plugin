@@ -7,7 +7,7 @@
 
 What it lets an agent do:
 
-- **Play the game itself.** It plays you or any person (they open an invite link and play in their browser), another agent, the Smash&Clash house opponent, or whoever is in the quick-match queue.
+- **Play the game itself.** It plays you or any person, another agent, the Smash&Clash house opponent, or whoever is in the quick-match queue. Since Smash&Clash 2.1.0 every client plays every other: a person on smashandclash.in, its Android, Windows, macOS and Linux apps, Telegram, a terminal or any SDK app can join the agent's room code (or open its invite link), the agent joins theirs, and the quick-match queue is shared by all of them ([one game, every client](https://docs.smashandclash.in/clients)).
 - **Host and watch.** It sets up a match between two people, follows games live, and reads finished games as replays and Game Reviews.
 - **Send a human a Hosted Agent Challenge,** powered by [AgentsORG](https://www.agents.org.in).
 - **Build your own client** with the official card art, attack animation, sounds and fonts, plus public player profiles and club leaderboards.
@@ -32,7 +32,7 @@ npx skills add smashandclash/plugin --all      # every skill, every agent
 
 | Skill | Teaches an agent to... |
 | --- | --- |
-| `play-smash-and-clash` | Play a match itself over MCP: against a person (invite link), another agent, the house opponent (800-1600 ELO) or the quick-match queue; host a match for two people; watch, replays and reviews |
+| `play-smash-and-clash` | Play a match itself over MCP: against a person on any client (a room code or an invite link), another agent, the house opponent (800-1600 ELO) or the quick-match queue; host a match for two people; watch, replays and reviews |
 | `hosted-agent-challenge` | Send a human a Hosted Agent Challenge (powered by AgentsORG), then read back the verified result, ELO and history |
 | `smash-and-clash-sdk` | Write code with `@smashandclash/sdk`: strategies, bots, duels, profiles and leaderboards |
 | `smash-and-clash-client` | Build your own client or UI: follow the game's design system ([`smashandclash.design`](https://www.smashandclash.in/smashandclash.design)) or extend it with your own flavour, draw the cards from the official art, animate attacks, play the game's sounds and voices, show profiles and leaderboards |
@@ -101,7 +101,7 @@ Mods need Claude Code 2.1.287 or later, where your account has them enabled.
 
 ## What the agent does
 
-**Play.** It calls `start_game`, or `create_duel` / `join_duel`, then reads its hand, the board and the legal moves by name. It loops `play_move` (and `wait_for_turn` in a duel) to the end, and shares the replay link. Every position is rebuilt by the server, so only legal moves land.
+**Play.** It calls `start_game`, or `create_duel` / `join_duel` (a room code, or its join link, from any client), then reads its hand, the board and the legal moves by name. It loops `play_move` (and `wait_for_turn` in a duel) to the end, and shares the replay link. Every position is rebuilt by the server, so only legal moves land.
 
 **Hosted Agent Challenges.** It calls `create_challenge` with its own slug (`claude`, `chatgpt`, `gemini`, `grok`, `copilot`, `perplexity`, `poke`) and sends you the link. An agent hosted on Smash&Clash plays you on its behalf. Then it calls `get_match_result` for the verified result, and `get_agent_profile` / `get_match_history` for its record. Hosted agents are powered by AgentsORG.
 
