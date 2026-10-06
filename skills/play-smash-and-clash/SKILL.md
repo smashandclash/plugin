@@ -63,12 +63,14 @@ Moves look like `Pengu@C2` (place), `Pengu!C2` (overrun), `hop→E3`, `BOULDER(D
 
 1. One side calls `create_duel`. It returns a 6-letter `code` with the `game_id` and `player_token`. Give the code to the other agent, or to the user.
 2. The other side calls `join_duel` with the code. `list_open_duels` shows duels waiting for a second player.
+
+Codes are the same on every client: a person can join your code on smashandclash.in (**Play a friend → Join**), in Telegram, in a terminal or in any app, and `join_duel` takes a code (or its join link, `https://www.smashandclash.in/?join=K7QF2M`) that someone made on any of them.
 3. Each side alternates `wait_for_turn` (up to 20 s; call it again if it returns early) and `play_move`.
 4. `get_game` with your token shows your view at any time. Without a token it shows the public board.
 
 ## Quick match
 
-`find_match` with `name` and `opponent` (`any`, `agent` or `person`) pairs you with whoever has waited longest. If nobody is waiting, `status` is `waiting`: keep calling `wait_for_turn` to hold your place (stop and it lapses within a minute; `resign` leaves the queue). Then play as in a duel.
+`find_match` with `name` and `opponent` (`any`, `agent` or `person`) pairs you with whoever has waited longest - on any client: people press PLAY on smashandclash.in, in Telegram or in a terminal, and wait in the same queue. If nobody is waiting, `status` is `waiting`: keep calling `wait_for_turn` to hold your place (stop and it lapses within a minute; `resign` leaves the queue). Then play as in a duel.
 
 ## Host a match between two people
 

@@ -58,6 +58,8 @@ const guest = await sc.games.joinDuel('K7QF2M', { name: 'Beta' });
 await guest.playOut(myStrategy);
 ```
 
+Every client shares one game network (SDK 0.5.0): a code made on smashandclash.in, in Telegram, the CLI or any app joins here, and `host.joinLink` opens on all of them. To open whatever a player pastes - a code, a join, invite or watch link, a replay - use `sc.games.open(text, { name, as: 'person', rating })`: it returns `{ kind: 'game', game }` for a seat, or `{ kind: 'watch', game }` (a watch link, or a room that is full). `parseLink(text)` reads one without calling the API. Pass the player's `rating` and `game.state.ratings` carries both; `game.state.clients` says which client each seat plays from. Leave a waiting room or the queue with `game.leave()` - it never resigns a pairing that just landed.
+
 Also available:
 
 - `sc.games.openDuels()` lists duels waiting for a second player.
@@ -105,7 +107,7 @@ const match = await sc.games.createMatch({ players: ['Ada', 'Grace'] });
 const end = await match.waitForEnd();
 const review = await match.review();           // accuracy, turning point, biggest blunder
 
-// quick match: whoever is waiting
+// quick match: whoever is waiting, on any client (the website's PLAY waits in this queue too)
 const game = await sc.games.quickMatch({ opponent: 'any' });
 
 // watch and look back

@@ -39,7 +39,11 @@ smashandclash duel create --json      # data.code: give it to the other side
 smashandclash duel join K7QF2M --json
 smashandclash wait --json             # until it's your turn (up to 20 s; call again)
 smashandclash duels --json            # duels waiting for a second player
+smashandclash open <code | link> --json   # whatever someone shared from any client: a code or join link
+                                          #   (a seat; a full room opens to watch), an invite, a watch link
 ```
+
+Codes are the same on every client: a room made on smashandclash.in (Play a friend), in Telegram or in any SDK app opens here, and `duel create` prints a join link that opens on all of them.
 
 ## Hosted Agent Challenges (powered by AgentsORG)
 

@@ -1,0 +1,39 @@
+name: CI
+
+# Every push and pull request: the manifests parse and validate, every skill has its
+# frontmatter, and the Claude Code mod's logic tests pass.
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Manifests are JSON
+        run: |
+          for f in plugin.json mcp.json .mcp.json .claude-plugin/*.json .cursor-plugin/*.json; do
+            [ -f "$f" ] || continue
+            node -e "JSON.parse(require('fs').readFileSync(process.argv[1], 'utf8'))" "$f" && echo "ok  $f"
+          done
+
+      - name: Every skill names and describes itself
+        run: |
+          fail=0
+          for s in skills/*/SKILL.md; do
+            head -20 "$s" | grep -q '^name:' && head -20 "$s" | grep -q '^description:' || { echo "::error file=$s::SKILL.md needs name and description frontmatter"; fail=1; }
+          done
+          exit $fail
+
+      - name: Claude Code plugin validate
+        run: npx --yes @anthropic-ai/claude-code@2.1.287 plugin validate .
+
+      - name: Mod logic tests
+        working-directory: com.anthropic.claude-code/smash-and-clash-mod
+        run: node --test tests/logic.test.mjs
