@@ -110,6 +110,9 @@ const game = await sc.games.quickMatch({ opponent: 'any' });
 
 // watch and look back
 for await (const s of sc.games.spectate(id)) console.log(s.lastMove, s.score);
+for await (const m of sc.games.feed(id)) console.log(m.name, m.events);   // 0.4: each move with its events, hands as counts
+const { game: onNow } = await sc.games.featured();                        // the game to stream now
+// every game's live page on the real board: game.state.watchPage (?overlay=1 for a stream); /tv follows the featured game
 await sc.games.replay(id);                       // finished games only
 await sc.replays.read('https://www.smashandclash.in/replay#z=...');
 await sc.cards();

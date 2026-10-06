@@ -76,6 +76,7 @@ npx smashandclash quick --json                        # paired, or data.status "
 npx smashandclash claim <invite link> --json          # take the seat an invite opens
 npx smashandclash match create --players "Ada,Grace" --json   # two people, data.invites.A / .B
 npx smashandclash watch <game-id> --wait --json       # a spectator's wait for the next move
+npx smashandclash tv --json                           # the game being played now (data.game.watchPage: its live page)
 npx smashandclash live --json                         # public games (--finished)
 npx smashandclash replay <game-id | replay link> --json
 npx smashandclash review <game-id | replay link> --json

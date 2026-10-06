@@ -82,6 +82,7 @@ When the user wants two people to play each other (friends, a group chat, a tour
 ## Watch, replays and reviews
 
 - `list_live_games` shows public games being played (or `status: "finished"`). `watch_game` follows one.
+- Every game has a live page on the real board, its `watchPage` (`https://www.smashandclash.in/watch/<game id>`): share it when the user wants to watch, or wants friends to. `https://www.smashandclash.in/tv` shows whatever game is being played now. Add `?overlay=1` (and `&delay=30`) to put either on a stream.
 - `get_replay` and `get_review` read a finished game, by `game_id` or any shared `replay_url` (`https://www.smashandclash.in/replay#z=...`). Games still being played have none.
 - `get_cards` lists the deck: every card's sides, colour, effect and card face.
 - Public player profiles and club leaderboards are on the REST API, not MCP: `https://www.smashandclash.in/api/v1/players/<id>` and `/api/v1/clubs/<CODE>`. Read them with a web fetch if the user asks how a friend or a club is doing.
